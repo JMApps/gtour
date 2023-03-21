@@ -7,7 +7,7 @@ class FabToAddUserPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
-
+        Navigator.pushNamed(context, 'add_users_page');
       },
       child: const Icon(Icons.add),
     );
