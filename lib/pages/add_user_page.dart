@@ -11,7 +11,7 @@ class AddUserPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Добавить пользователя'),
+        title: const Text('Добавить человека'),
       ),
       body: FutureBuilder<List>(
         future: context.watch<UsersState>().getUsers(),
@@ -22,7 +22,7 @@ class AddUserPage extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.all(16),
                     child: Text(
-                      'Добавьте первого пользователя +',
+                      'Добавьте первого человека +',
                       style: TextStyle(
                         fontSize: 18,
                       ),

@@ -1,23 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:gtour/application/state/users_state.dart';
 import 'package:gtour/application/theme/app_theme.dart';
+import 'package:gtour/data/model/user.dart';
 import 'package:provider/provider.dart';
 
-class AddUserBottomSheet extends StatefulWidget {
-  const AddUserBottomSheet({Key? key}) : super(key: key);
+class ChangeUserBottomSheet extends StatefulWidget {
+  const ChangeUserBottomSheet({Key? key, required this.user}) : super(key: key);
+
+  final User user;
 
   @override
-  State<AddUserBottomSheet> createState() => _AddUserBottomSheetState();
+  State<ChangeUserBottomSheet> createState() => _ChangeUserBottomSheetState();
 }
 
-class _AddUserBottomSheetState extends State<AddUserBottomSheet> {
+class _ChangeUserBottomSheetState extends State<ChangeUserBottomSheet> {
   final _formFirstName = GlobalKey<FormState>();
   final _formSecondName = GlobalKey<FormState>();
 
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _secondNameController = TextEditingController();
+  late final TextEditingController _firstNameController;
+  late final TextEditingController _secondNameController;
 
   late Map<String, dynamic> user;
+
+  @override
+  void initState() {
+    _firstNameController = TextEditingController(text: widget.user.firstName);
+    _secondNameController = TextEditingController(text: widget.user.secondName);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +53,11 @@ class _AddUserBottomSheetState extends State<AddUserBottomSheet> {
                 textCapitalization: TextCapitalization.sentences,
                 textInputAction: TextInputAction.next,
                 textAlign: TextAlign.center,
-                decoration: const InputDecoration(labelText: 'Введите имя'),
+                decoration:
+                    const InputDecoration(labelText: 'Введите новое имя'),
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Введите имя';
+                    return 'Введите новое имя';
                   }
                   return null;
                 },
@@ -63,11 +74,11 @@ class _AddUserBottomSheetState extends State<AddUserBottomSheet> {
                 textCapitalization: TextCapitalization.sentences,
                 textInputAction: TextInputAction.done,
                 textAlign: TextAlign.center,
-                decoration:
-                    const InputDecoration(labelText: 'Введите имя-перевод'),
+                decoration: const InputDecoration(
+                    labelText: 'Введите новое имя-перевод'),
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Введите имя-перевод';
+                    return 'Введите новое имя-перевод';
                   }
                   return null;
                 },
@@ -78,25 +89,30 @@ class _AddUserBottomSheetState extends State<AddUserBottomSheet> {
               onPressed: () {
                 if (_formFirstName.currentState!.validate() &&
                     _formSecondName.currentState!.validate()) {
-                  Navigator.pop(context);
-                  user = {
-                    'first_name': _firstNameController.text,
-                    'second_name': _secondNameController.text,
-                  };
-                  context.read<UsersState>().addUser(user: user);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      duration: const Duration(seconds: 2),
-                      backgroundColor: appColors.accentColor,
-                      content: const Text(
-                        'Добавлено',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
+                  if (widget.user.firstName != _firstNameController.text ||
+                      widget.user.secondName != _secondNameController.text) {
+                    Navigator.pop(context);
+                    user = {
+                      'first_name': _firstNameController.text,
+                      'second_name': _secondNameController.text,
+                    };
+                    context.read<UsersState>().updateUser(user: user, id: widget.user.id);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        duration: const Duration(seconds: 2),
+                        backgroundColor: appColors.accentColor,
+                        content: const Text(
+                          'Изменено',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
                         ),
                       ),
-                    ),
-                  );
+                    );
+                  } else {
+                    Navigator.pop(context);
+                  }
                 }
               },
               color: appColors.accentColor,
@@ -105,7 +121,7 @@ class _AddUserBottomSheetState extends State<AddUserBottomSheet> {
                 borderRadius: BorderRadius.circular(15),
               ),
               child: const Text(
-                'Добавить',
+                'Изменить',
                 style: TextStyle(
                   color: Colors.white,
                 ),

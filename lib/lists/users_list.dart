@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:gtour/items/user_item.dart';
 
 class UsersList extends StatelessWidget {
@@ -8,12 +8,14 @@ class UsersList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      itemCount: snapshot.data!.length,
-      itemBuilder: (context, index) {
-        return UserItem(user: snapshot.data![index], index: index);
-      },
+    return CupertinoScrollbar(
+      child: ListView.builder(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        itemCount: snapshot.data!.length,
+        itemBuilder: (context, index) {
+          return UserItem(user: snapshot.data![index], index: index + 1);
+        },
+      ),
     );
   }
 }
