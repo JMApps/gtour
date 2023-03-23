@@ -28,9 +28,13 @@ class ChangeDeleteUserBottomSheet extends StatelessWidget {
                 Navigator.pop(context);
                 showModalBottomSheet(
                   context: context,
+                  isScrollControlled: true,
                   backgroundColor: Colors.transparent,
-                  builder: (_) => ChangeUserBottomSheet(
-                    user: user,
+                  builder: (context) => Padding(
+                    padding: MediaQuery.of(context).viewInsets,
+                    child: ChangeUserBottomSheet(
+                      user: user,
+                    ),
                   ),
                 );
               },
