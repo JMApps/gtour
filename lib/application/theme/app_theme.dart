@@ -77,10 +77,16 @@ class AppTheme {
 }
 
 extension ColorSchemes on ColorScheme {
+
   Color get accentColor => brightness == Brightness.light
       ? const Color(0xFFF44336)
       : const Color(0xFFFFC107);
+
   Color get idCircleBackground => brightness == Brightness.light
       ? const Color(0x80009688)
       : const Color(0xFF263238);
+
+  Color get materialButtonColor => brightness == Brightness.light
+      ? const Color(0xFFFF756C)
+      : const Color(0xFF9B7200);
 }

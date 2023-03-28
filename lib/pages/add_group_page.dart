@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gtour/application/state/users_state.dart';
-import 'package:gtour/application/theme/app_theme.dart';
-import 'package:gtour/lists/users_list.dart';
-import 'package:gtour/widgets/release_date_picker.dart';
-import 'package:gtour/widgets/travel_date_picker.dart';
+import 'package:gtour/widgets/add_group_column.dart';
 import 'package:provider/provider.dart';
 
 class AddGroupPage extends StatelessWidget {
@@ -28,61 +25,19 @@ class AddGroupPage extends StatelessWidget {
         future: context.watch<UsersState>().getUsers(),
         builder: (context, snapshot) {
           return snapshot.hasData
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(
-                      child: UsersList(snapshot: snapshot),
+              ? const AddGroupColumn()
+              : const Center(
+                  child: ListTile(
+                    title: Icon(
+                      Icons.person_add_alt_outlined,
+                      size: 35,
                     ),
-                    const SizedBox(height: 8),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: const [
-                          TravelDatePicker(),
-                          ReleaseDatePicker(),
-                        ],
+                    subtitle: Text(
+                      'Добавьте пользователей',
+                      style: TextStyle(
+                        fontSize: 18,
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                      ),
-                      child: MaterialButton(
-                        onPressed: () {
-
-                        },
-                        color: appColors.accentColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: const Text(
-                          'Добавить',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                  ],
-                )
-              : Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: TextButton.icon(
-                      onPressed: null,
-                      icon: const Icon(
-                        Icons.person_add_alt_1_outlined,
-                        size: 35,
-                      ),
-                      label: const Text(
-                        'Чтобы добавить группу, вы должны сначала добавить пользователей',
-                        style: TextStyle(fontSize: 18),
-                        textAlign: TextAlign.center,
-                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 );
