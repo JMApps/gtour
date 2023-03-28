@@ -12,10 +12,7 @@ class FabAddUser extends StatelessWidget {
           context: context,
           isScrollControlled: true,
           backgroundColor: Colors.transparent,
-          builder: (_) => Padding(
-            padding: MediaQuery.of(context).viewInsets,
-            child: const AddUserBottomSheet(),
-          ),
+          builder: (_) => const AddUserBottomSheet(),
         );
       },
       child: const Icon(Icons.add),

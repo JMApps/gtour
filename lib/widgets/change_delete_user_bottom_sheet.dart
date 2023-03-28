@@ -30,11 +30,8 @@ class ChangeDeleteUserBottomSheet extends StatelessWidget {
                   context: context,
                   isScrollControlled: true,
                   backgroundColor: Colors.transparent,
-                  builder: (context) => Padding(
-                    padding: MediaQuery.of(context).viewInsets,
-                    child: ChangeUserBottomSheet(
-                      user: user,
-                    ),
+                  builder: (context) => ChangeUserBottomSheet(
+                    user: user,
                   ),
                 );
               },
