@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:gtour/application/theme/app_theme.dart';
+import 'package:gtour/lists/users_for_group_list.dart';
 
 class AddGroupColumn extends StatelessWidget {
-  const AddGroupColumn({Key? key}) : super(key: key);
+  const AddGroupColumn({Key? key, required this.snapshot}) : super(key: key);
+
+  final AsyncSnapshot snapshot;
 
   @override
   Widget build(BuildContext context) {
@@ -12,19 +15,8 @@ class AddGroupColumn extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Expanded(
-          child: ListView.builder(
-            itemCount: 50,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Center(
-                    child: Text('$index'),
-                  ),
-                ),
-              );
-            },
+          child: UsersForGroupList(
+            snapshot: snapshot,
           ),
         ),
         const SizedBox(height: 8),
@@ -38,12 +30,7 @@ class AddGroupColumn extends StatelessWidget {
                   showTitleActions: true,
                   minTime: DateTime(2023, 3, 28),
                   maxTime: DateTime(2030, 12, 31),
-                  onChanged: (date) {
-                    print('change $date');
-                  },
-                  onConfirm: (date) {
-                    print('confirm $date');
-                  },
+                  onConfirm: (date) {},
                   currentTime: DateTime.now(),
                   locale: LocaleType.ru,
                 );
@@ -58,12 +45,7 @@ class AddGroupColumn extends StatelessWidget {
                   showTitleActions: true,
                   minTime: DateTime(2023, 3, 28),
                   maxTime: DateTime(2030, 12, 31),
-                  onChanged: (date) {
-                    print('change $date');
-                  },
-                  onConfirm: (date) {
-                    print('confirm $date');
-                  },
+                  onConfirm: (date) {},
                   currentTime: DateTime.now(),
                   locale: LocaleType.ru,
                 );

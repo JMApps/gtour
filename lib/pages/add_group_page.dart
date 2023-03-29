@@ -25,7 +25,7 @@ class AddGroupPage extends StatelessWidget {
         future: context.watch<UsersState>().getUsers(),
         builder: (context, snapshot) {
           return snapshot.hasData
-              ? const AddGroupColumn()
+              ? AddGroupColumn(snapshot: snapshot)
               : const Center(
                   child: ListTile(
                     title: Icon(

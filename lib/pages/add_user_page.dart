@@ -19,16 +19,20 @@ class AddUserPage extends StatelessWidget {
           return snapshot.hasData
               ? UsersList(snapshot: snapshot)
               : const Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Text(
-                      'Добавьте первого человека +',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
-                  ),
-                );
+            child: ListTile(
+              title: Icon(
+                Icons.add,
+                size: 35,
+              ),
+              subtitle: Text(
+                'Добавьте пользователя',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          );
         },
       ),
       floatingActionButton: const FabAddUser(),

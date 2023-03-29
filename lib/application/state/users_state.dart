@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gtour/data/model/user.dart';
-import 'package:gtour/data/services/database_helper.dart';
+import 'package:gtour/data/services/users_database_helper.dart';
 
 class UsersState extends ChangeNotifier {
-  final DatabaseHelper _databaseHelper = DatabaseHelper();
+  final UsersDatabaseHelper _databaseHelper = UsersDatabaseHelper();
 
   List<User>? _usersList = [];
-
-  List<User> get getUsersList => _usersList!;
 
   Future<void> addUser({required Map<String, dynamic> user}) async {
     await _databaseHelper.addUser(user: user);

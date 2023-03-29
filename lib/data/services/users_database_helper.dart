@@ -1,12 +1,12 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-class DatabaseHelper {
-  static final DatabaseHelper _instance = DatabaseHelper._internal();
+class UsersDatabaseHelper {
+  static final UsersDatabaseHelper _instance = UsersDatabaseHelper._internal();
 
-  factory DatabaseHelper() => _instance;
+  factory UsersDatabaseHelper() => _instance;
 
-  DatabaseHelper._internal();
+  UsersDatabaseHelper._internal();
 
   final String _databaseName = 'users.db';
   final String _tableName = 'Table_of_users';
