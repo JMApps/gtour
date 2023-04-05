@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:gtour/items/user_for_group_item.dart';
+import 'package:gtour/items/group_item.dart';
 
-class UsersForGroupList extends StatelessWidget {
-  const UsersForGroupList({Key? key, required this.snapshot}) : super(key: key);
+class GroupsList extends StatelessWidget {
+  const GroupsList({Key? key, required this.snapshot}) : super(key: key);
 
   final AsyncSnapshot<List<dynamic>> snapshot;
 
@@ -13,8 +13,8 @@ class UsersForGroupList extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8),
         itemCount: snapshot.data!.length,
         itemBuilder: (context, index) {
-          return UserForGroupItem(
-            user: snapshot.data![index],
+          return GroupItem(
+            item: snapshot.data![index],
             index: index,
           );
         },

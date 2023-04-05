@@ -1,8 +1,10 @@
+import 'package:gtour/data/model/group.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class GroupsDatabaseHelper {
-  static final GroupsDatabaseHelper _instance = GroupsDatabaseHelper._internal();
+  static final GroupsDatabaseHelper _instance =
+      GroupsDatabaseHelper._internal();
 
   factory GroupsDatabaseHelper() => _instance;
 
@@ -37,7 +39,17 @@ class GroupsDatabaseHelper {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         users TEXT,
         data_travel TEXT,
-        data_entry)
+        data_entry TEXT)
         ''');
+  }
+
+  Future<int> addGroup({required Group group}) async {
+    final Database db = await _instance.getDatabase;
+    return await db.insert(_tableName, group.toMap());
+  }
+
+  Future<List<Map<String, dynamic>>> getGroups() async {
+    final Database db = await _instance.getDatabase;
+    return await db.query(_tableName);
   }
 }

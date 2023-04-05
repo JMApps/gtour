@@ -1,24 +1,27 @@
-import 'package:gtour/data/model/user.dart';
-
 class Group {
-  final int id;
-  final List<User> users;
+  final String users;
   final DateTime dateTravel;
   final DateTime dateEntry;
 
   const Group({
-    required this.id,
     required this.users,
     required this.dateTravel,
     required this.dateEntry,
   });
 
+  Map<String, dynamic> toMap() {
+    return {
+      'users': users,
+      'data_travel': dateTravel.toIso8601String(),
+      'data_entry': dateEntry.toIso8601String(),
+    };
+  }
+
   factory Group.fromMap(Map<String, dynamic> map) {
     return Group(
-      id: map['id'],
       users: map['users'],
-      dateTravel: map['data_travel'],
-      dateEntry: map['data_entry'],
+      dateTravel: DateTime.parse(map['data_travel']),
+      dateEntry: DateTime.parse(map['data_entry']),
     );
   }
 }
