@@ -35,9 +35,12 @@ class UserForGroupItem extends StatelessWidget {
             fontSize: 18,
           ),
         ),
-        value: context.watch<GroupsState>().getForGroupUsersList.contains(user.firstName),
+        value: context.watch<GroupsState>().getForGroupUsersList.contains(
+          user.secondName.isNotEmpty ? '${user.firstName} – (${user.secondName})' : user.firstName
+        ),
         onChanged: (bool? isSelected) {
-          context.read<GroupsState>().addUsersForGroup(isSelected: isSelected!, user: user.firstName);
+          context.read<GroupsState>().addUsersForGroup(isSelected: isSelected!,
+              user: user.secondName.isNotEmpty ? '${user.firstName} – (${user.secondName})' : user.firstName);
         },
       ),
     );

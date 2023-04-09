@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gtour/application/theme/app_theme.dart';
 import 'package:gtour/data/model/group.dart';
 import 'package:intl/intl.dart';
 
@@ -14,6 +16,7 @@ class GroupItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme appColors = Theme.of(context).colorScheme;
     return Card(
       elevation: 1,
       margin: const EdgeInsets.only(top: 8),
@@ -25,16 +28,66 @@ class GroupItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(item.users),
+            Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25)),
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Text(
+                  item.users,
+                  style: const TextStyle(fontSize: 20),
+                ),
+              ),
+            ),
             const SizedBox(height: 8),
-            Text(
-              'Дата выезда: ${DateFormat.yMd().format(item.dateTravel)}',
-              textAlign: TextAlign.start,
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
+              leading: Icon(
+                CupertinoIcons.calendar_badge_plus,
+                color: appColors.dateIconColors,
+              ),
+              title: Text(
+                'Дата выезда: ${DateFormat('dd-MM-yyyy').format(item.dateTravel)}',
+                textAlign: TextAlign.start,
+              ),
             ),
-            Text(
-              'Дата заступления: ${DateFormat.yMd().format(item.dateEntry)}',
-              textAlign: TextAlign.start,
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
+              leading: Icon(
+                CupertinoIcons.calendar,
+                color: appColors.accentColor,
+              ),
+              title: Text(
+                'Дата заступления: ${DateFormat('dd-MM-yyyy').format(item.dateEntry)}',
+                textAlign: TextAlign.start,
+              ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    CupertinoIcons.doc_on_doc,
+                  ),
+                  splashRadius: 25,
+                  visualDensity:
+                      const VisualDensity(vertical: -4, horizontal: -4),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    CupertinoIcons.share,
+                  ),
+                  splashRadius: 25,
+                  visualDensity:
+                      const VisualDensity(vertical: -4, horizontal: -4),
+                ),
+              ],
+            )
           ],
         ),
       ),

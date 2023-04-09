@@ -11,9 +11,9 @@ class GroupsState extends ChangeNotifier {
 
   List<String> get getForGroupUsersList => _forGroupUsersList;
 
-  late DateTime _dateTravel;
+  DateTime? _dateTravel;
 
-  late DateTime _dateEntry;
+  DateTime? _dateEntry;
 
   addUsersForGroup({required bool isSelected, required String user}) {
     if (isSelected) {
@@ -34,12 +34,16 @@ class GroupsState extends ChangeNotifier {
     notifyListeners();
   }
 
+  DateTime? get dateTravel => _dateTravel;
+
+  DateTime? get dateEntry => _dateEntry;
+
   Future<void> addGroup() async {
     await _databaseHelper.addGroup(
       group: Group(
-        users: _forGroupUsersList.join(', '),
-        dateTravel: _dateTravel,
-        dateEntry: _dateEntry,
+        users: _forGroupUsersList.join(',\n'),
+        dateTravel: _dateTravel!,
+        dateEntry: _dateEntry!,
       ),
     );
     notifyListeners();

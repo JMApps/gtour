@@ -12,7 +12,6 @@ class AddUserBottomSheet extends StatefulWidget {
 
 class _AddUserBottomSheetState extends State<AddUserBottomSheet> {
   final _formFirstName = GlobalKey<FormState>();
-  final _formSecondName = GlobalKey<FormState>();
 
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _secondNameController = TextEditingController();
@@ -53,31 +52,20 @@ class _AddUserBottomSheetState extends State<AddUserBottomSheet> {
               ),
             ),
             const SizedBox(height: 8),
-            Form(
-              key: _formSecondName,
-              child: TextFormField(
-                controller: _secondNameController,
-                autofocus: false,
-                autocorrect: false,
-                keyboardType: TextInputType.text,
-                textCapitalization: TextCapitalization.sentences,
-                textInputAction: TextInputAction.done,
-                textAlign: TextAlign.center,
-                decoration:
-                    const InputDecoration(labelText: 'Введите имя-перевод'),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Введите имя-перевод';
-                  }
-                  return null;
-                },
-              ),
+            TextField(
+              controller: _secondNameController,
+              autofocus: false,
+              autocorrect: false,
+              keyboardType: TextInputType.text,
+              textCapitalization: TextCapitalization.sentences,
+              textInputAction: TextInputAction.done,
+              textAlign: TextAlign.center,
+              decoration: const InputDecoration(labelText: 'Введите имя-перевод'),
             ),
             const SizedBox(height: 8),
             MaterialButton(
               onPressed: () {
-                if (_formFirstName.currentState!.validate() &&
-                    _formSecondName.currentState!.validate()) {
+                if (_formFirstName.currentState!.validate()) {
                   Navigator.pop(context);
                   user = {
                     'first_name': _firstNameController.text,

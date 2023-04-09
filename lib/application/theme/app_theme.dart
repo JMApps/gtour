@@ -89,4 +89,8 @@ extension ColorSchemes on ColorScheme {
   Color get materialButtonColor => brightness == Brightness.light
       ? const Color(0xFFFF756C)
       : const Color(0xFF9B7200);
+
+  Color get dateIconColors => brightness == Brightness.light
+      ? const Color(0xFF009688)
+      : const Color(0xFF9B7200);
 }

@@ -57,12 +57,14 @@ class UserItem extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      user.secondName,
-                      style: const TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
+                    user.secondName.isNotEmpty
+                        ? Text(
+                            user.secondName,
+                            style: const TextStyle(
+                              fontSize: 18,
+                            ),
+                          )
+                        : const SizedBox(),
                   ],
                 ),
               ),

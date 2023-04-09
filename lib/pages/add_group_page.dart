@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gtour/application/state/users_state.dart';
-import 'package:gtour/widgets/add_group_column.dart';
+import 'package:gtour/lists/users_for_group_list.dart';
+import 'package:gtour/widgets/add_group_bottom_navigation.dart';
 import 'package:provider/provider.dart';
 
 class AddGroupPage extends StatelessWidget {
@@ -25,7 +26,9 @@ class AddGroupPage extends StatelessWidget {
         future: context.watch<UsersState>().getUsers(),
         builder: (context, snapshot) {
           return snapshot.hasData
-              ? AddGroupColumn(snapshot: snapshot)
+              ? UsersForGroupList(
+                  snapshot: snapshot,
+                )
               : const Center(
                   child: ListTile(
                     title: Icon(
@@ -43,6 +46,7 @@ class AddGroupPage extends StatelessWidget {
                 );
         },
       ),
+      bottomNavigationBar: const AddGroupBottomNavigation(),
     );
   }
 }
